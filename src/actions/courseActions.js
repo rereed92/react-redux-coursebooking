@@ -48,15 +48,14 @@ export function addCourseSuccess(courseDetails) {
     };
 }
 
-export function removeCourse() {
+export function removeCourse(id) {
     return function(dispatch) {
-        // return courseApi.addCourse(course)
-        //     .then(newCourse => {
-        //         dispatch(addCourseSuccess(course));
-        //         dispatch(push('/courses'));
-        //     }).catch(error => {
-        //         throw(error);
-        //     });
+        return courseApi.removeCourse(id)
+            .then(id => {
+                dispatch(removeCourseSuccess(id));
+            }).catch(error => {
+                throw(error);
+            });
     };
 }
 

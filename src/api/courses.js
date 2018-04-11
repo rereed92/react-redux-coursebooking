@@ -1,4 +1,4 @@
-const courses = [
+let courses = [
     {
       id: "react-flux-building-applications",
       title: "Building Applications in React and Flux",
@@ -41,13 +41,15 @@ const courses = [
     }
 ];
 
+const delay = 500;
+
 class courseApi {
 
     static getCourses() {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve(Object.assign([], courses));
-            }, 1000);
+            }, delay);
         });
     }
 
@@ -58,7 +60,16 @@ class courseApi {
             setTimeout(() => {
                 courses.push(course);
                 resolve(course);
-            }, 1000);
+            }, delay);
+        });
+    }
+
+    static removeCourse(courseId) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                courses = courses.filter(course => course.id !== courseId);
+                resolve(courseId);
+            }, delay);
         });
     }
 }
