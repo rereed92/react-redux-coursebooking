@@ -23,7 +23,7 @@ class CourseContainer extends Component {
         return (
             <div>
                 <h2>Courses</h2>
-                <Link to="/courses/add-course">Add Course</Link>
+                <Link to="/add-course">Add Course</Link>
                 {/* <SortByContainer sortBy={this.props.sortBy} onSortBy={this.handleSortBy} /> */}
                 <CourseListContainer courses={this.props.courses} onRemoveClick={this.handleRemoveClick} />
             </div>

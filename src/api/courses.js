@@ -53,6 +53,21 @@ class courseApi {
         });
     }
 
+    static getCourse(id) {
+        return courseApi.getCourses()
+            .then(courses => {
+                console.log(courses);
+                courses.forEach(course => {
+                    if (course.id === id) {
+                        return course;
+                    }
+                });
+                // return courses.filter(course => course.id === id);
+            }).catch(error => {
+                throw(error);
+            });
+    }
+
     static addCourse(course) {
         course = Object.assign({}, course);
 

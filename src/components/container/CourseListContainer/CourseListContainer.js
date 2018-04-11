@@ -21,7 +21,7 @@ class CourseListContainer extends Component {
                             <th>Author</th>
                             <th>Category</th>
                             <th>Length</th>
-                            <th>Remove?</th>
+                            <th>Manage</th>
                         </tr>
                     </thead>
                     <tbody>

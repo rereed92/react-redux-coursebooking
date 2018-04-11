@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 
 const CourseList = ({ course, onRemoveClick }) => {
     return (
@@ -9,7 +10,7 @@ const CourseList = ({ course, onRemoveClick }) => {
             <td>{course.authorId}</td>
             <td>{course.category}</td>
             <td>{course.length}</td>
-            <td><button onClick={() => onRemoveClick(course.id)}>Remove</button></td>
+            <td><Link to={"/course/" + course.id}>View Course</Link></td>
         </tr>
     );
 };
