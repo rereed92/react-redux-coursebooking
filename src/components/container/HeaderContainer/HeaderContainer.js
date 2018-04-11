@@ -16,7 +16,7 @@ class HeaderContainer extends Component {
                 </nav>
             </div>
         );
-    };
-};
+    }
+}
 
 export default HeaderContainer;

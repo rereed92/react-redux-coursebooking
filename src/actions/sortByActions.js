@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 
-import sortBy from '../data/sortBy';
+import sortBy from '../api/sortBy';
 
 export function loadSortBy() {
     return { 

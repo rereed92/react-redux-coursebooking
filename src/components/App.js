@@ -12,7 +12,7 @@ class App extends Component {
                 <main>
                     { this.props.children }
                 </main>
-                <FooterContainer />
+                {/* <FooterContainer /> */}
             </div>
         );
     }

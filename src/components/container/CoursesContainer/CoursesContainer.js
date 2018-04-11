@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import CourseListContainer from '../CourseListContainer/CourseListContainer';
-import AddCourseContainer from '../AddCourseContainer/AddCourseContainer';
+// import AddCourseContainer from '../AddCourseContainer/AddCourseContainer';
 import SortByContainer from '../SortByContainer/SortByContainer';
 
 import { removeCourse, sortCourse } from '../../../actions/courseActions';
@@ -22,8 +23,9 @@ class CourseContainer extends Component {
         return (
             <div>
                 <h2>Courses</h2>
-                <AddCourseContainer categories={this.props.categories} />
-                <SortByContainer sortBy={this.props.sortBy} onSortBy={this.handleSortBy} />
+                <Link to="/courses/add-course">Add Course</Link>
+                {/* <AddCourseContainer categories={this.props.categories} /> */}
+                {/* <SortByContainer sortBy={this.props.sortBy} onSortBy={this.handleSortBy} /> */}
                 <CourseListContainer courses={this.props.courses} onRemoveClick={this.handleRemoveClick} />
             </div>
         );

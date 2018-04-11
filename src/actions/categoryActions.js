@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 
-import categories from '../data/categories';
+import categories from '../api/categories';
 
 export function loadCategories() {
     return { 

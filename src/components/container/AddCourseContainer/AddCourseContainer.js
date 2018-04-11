@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import { addCourse } from '../../../actions/courseActions';
 
@@ -50,7 +51,7 @@ class AddCourseContainer extends Component {
                 <h3>Add Course</h3>
                 <form onSubmit={(e) => {
                         e.preventDefault();
-                        this.props.dispatch(addCourse(this.state));
+                        this.props.addNewCourse(this.state);
                         this.setState({
                             id: '',
                             title: '',
@@ -105,7 +106,21 @@ class AddCourseContainer extends Component {
 }
 
 AddCourseContainer.propTypes = {
-    dispatch: PropTypes.func.isRequired
+    categories: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories,
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        addNewCourse: (course) => {
+            dispatch(addCourse(course))
+        },
+    };
 };
  
-export default connect()(AddCourseContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCourseContainer);

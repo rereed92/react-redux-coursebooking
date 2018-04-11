@@ -41,4 +41,26 @@ const courses = [
     }
 ];
 
-export default courses;
+class courseApi {
+
+    static getCourses() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(Object.assign([], courses));
+            }, 1000);
+        });
+    }
+
+    static addCourse(course) {
+        course = Object.assign({}, course);
+
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                courses.push(course);
+                resolve(course);
+            }, 1000);
+        });
+    }
+}
+
+export default courseApi;
