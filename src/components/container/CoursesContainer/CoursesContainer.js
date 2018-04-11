@@ -15,7 +15,6 @@ class CourseContainer extends Component {
     };
 
     handleSortBy = (option, sorttype) => {
-        console.log(option, sorttype);
         this.props.onSortBy(option, sorttype)
     };
 

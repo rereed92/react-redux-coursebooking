@@ -5,7 +5,7 @@ class FooterContainer extends Component {
         return (
             <p>Footer</p>
         );
-    };
-};
+    }
+}
 
 export default FooterContainer;
