@@ -71,6 +71,7 @@ export function removeCourse(id) {
         return courseApi.removeCourse(id)
             .then(id => {
                 dispatch(removeCourseSuccess(id));
+                dispatch(push('/courses'));
             }).catch(error => {
                 throw(error);
             });
