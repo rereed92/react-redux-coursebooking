@@ -44,6 +44,7 @@ class CourseContainer extends Component {
     }
 
     handleRemoveClick() {
+        this.hideModal();
         this.props.removeCurrentCourse(this.state.course.id);
     }
 
