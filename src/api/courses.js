@@ -3,7 +3,7 @@ let courses = [
       id: "react-flux-building-applications",
       title: "Building Applications in React and Flux",
       watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
-      authorId: "cory-house",
+      author: "Cory House",
       length: "5:08",
       category: "JavaScript"
     },
@@ -11,7 +11,7 @@ let courses = [
       id: "clean-code",
       title: "Clean Code: Writing Code for Humans",
       watchHref: "http://www.pluralsight.com/courses/writing-clean-code-humans",
-      authorId: "cory-house",
+      author: "Cory House",
       length: "3:10",
       category: "Software Practices"
     },
@@ -19,7 +19,7 @@ let courses = [
       id: "architecture",
       title: "Architecting Applications for the Real World",
       watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
-      authorId: "cory-house",
+      author: "Cory House",
       length: "2:52",
       category: "Software Architecture"
     },
@@ -27,7 +27,7 @@ let courses = [
       id: "career-reboot-for-developer-mind",
       title: "Becoming an Outlier: Reprogramming the Developer Mind",
       watchHref: "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
-      authorId: "cory-house",
+      author: "Cory House",
       length: "2:30",
       category: "Career"
     },
@@ -35,7 +35,7 @@ let courses = [
       id: "web-components-shadow-dom",
       title: "Web Component Fundamentals",
       watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
-      authorId: "cory-house",
+      author: "Cory House",
       length: "5:10",
       category: "HTML5"
     }
@@ -54,18 +54,7 @@ class courseApi {
     }
 
     static getCourse(id) {
-        return courseApi.getCourses()
-            .then(courses => {
-                console.log(courses);
-                courses.forEach(course => {
-                    if (course.id === id) {
-                        return course;
-                    }
-                });
-                // return courses.filter(course => course.id === id);
-            }).catch(error => {
-                throw(error);
-            });
+        return courses.filter(course => course.id === id);
     }
 
     static addCourse(course) {
@@ -74,6 +63,16 @@ class courseApi {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 courses.push(course);
+                resolve(course);
+            }, delay);
+        });
+    }
+
+    static updateCourse(course) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                const courseIndex = courses.findIndex(c => c.id === course.id);
+                courses.splice(courseIndex, 1, course);
                 resolve(course);
             }, delay);
         });

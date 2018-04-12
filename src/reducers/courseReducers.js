@@ -24,7 +24,6 @@ const compareValues = (key, type='asc') => {
 };
 
 const courseReducers = (state = [], action) => {
-    console.log('hello reducer', action);
     switch(action.type) {
         case types.LOAD_COURSES_SUCCESS:
             return action.courses;
@@ -32,14 +31,13 @@ const courseReducers = (state = [], action) => {
         case types.ADD_COURSE:
             return [
                 ...state,
-                {
-                    id: action.id, 
-                    title: action.title, 
-                    watchHref: action.watchHref, 
-                    authorId: action.authorId,
-                    length: action.length,
-                    category: action.category
-                }
+                Object.assign({}, action)
+            ];
+
+        case types.UPDATE_COURSE:
+            return[
+                ...state.filter((course) => course.id !== action.id),
+                Object.assign({}, action)
             ];
 
         case types.REMOVE_COURSE:

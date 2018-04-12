@@ -13,23 +13,11 @@ class CourseListContainer extends Component {
         return (
             <div>
                 <h3>Listed Courses</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Category</th>
-                            <th>Length</th>
-                            <th>Manage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.props.courses.map(course =>
-                            <CourseList key={course.id} course={course} onRemoveClick={this.handleRemoveClick} />
-                        )}
-                    </tbody>
-                </table>
+                <ul>
+                    {this.props.courses.map(course =>
+                        <CourseList key={course.id} course={course} onRemoveClick={this.handleRemoveClick} />
+                    )}
+                </ul>    
             </div>
         );
     }

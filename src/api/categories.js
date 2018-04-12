@@ -21,4 +21,17 @@ const categories = [
     }
 ];
 
-export default categories;
+const delay = 500;
+
+class categoryApi {
+
+    static getCategories() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(Object.assign([], categories));
+            }, delay);
+        });
+    }
+}
+
+export default categoryApi;

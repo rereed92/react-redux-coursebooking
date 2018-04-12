@@ -14,7 +14,6 @@ export function loadCourses() {
                 throw(error);
             });
     };
-    
 }
 
 export function loadCoursesSuccess(courses) {
@@ -45,6 +44,25 @@ export function addCourseSuccess(courseDetails) {
         authorId: courseDetails.authorId,
         length: courseDetails.length,
         category: courseDetails.category
+    };
+}
+
+export function updateCourse(course) {
+    return function(dispatch) {
+        return courseApi.updateCourse(course)
+            .then(course => {
+                dispatch(updateCourseSuccess(course));
+                dispatch(push(`/course/${course.id}`));
+            }).catch(error => {
+                throw(error);
+            });
+    };
+}
+
+export function updateCourseSuccess(course) {
+    return {
+        type: types.UPDATE_COURSE,
+        course
     };
 }
 

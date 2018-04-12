@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 import { addCourse } from '../../../actions/courseActions';
 
@@ -18,7 +17,7 @@ class AddCourseContainer extends Component {
             id: '',
             title: '',
             watchHref: '',
-            authorId: '',
+            author: '',
             length: '',
             category: ''
         };
@@ -38,7 +37,6 @@ class AddCourseContainer extends Component {
     };
 
     render() { 
-
         allCategories = this.props.categories.map(category => {
             return {
                 value: category.id,
@@ -56,7 +54,7 @@ class AddCourseContainer extends Component {
                             id: '',
                             title: '',
                             watchHref: '',
-                            authorId: '',
+                            author: '',
                             length: '',
                             category: ''
                         });
@@ -77,10 +75,10 @@ class AddCourseContainer extends Component {
                         onChange={this.handleInputChange}/>
                     
                     <TextInput
-                        name="authorId"
+                        name="author"
                         label="Author"
                         placeholder="author"
-                        value={this.state.authorId} 
+                        value={this.state.author} 
                         onChange={this.handleInputChange}/>
 
                     <TextInput
