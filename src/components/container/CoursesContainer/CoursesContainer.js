@@ -20,16 +20,16 @@ class CoursesContainer extends Component {
         };
     }
 
-    // componentDidMount() {
-    //     console.log('props', this.props.sortOptions, this.state.options);
-    //     if (this.props.sortOptions !== this.state.options) {
-    //         console.log('adasdasd');
-    //     //     this.sort();
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.sortOptions !== nextProps.sortOptions) {
+    //         console.log('nextProps');
+    //         nextProps.load();
     //     }
     // }
 
     componentDidUpdate(prevProps, prevState) {
         // console.log(this.props.sortOptions, prevProps.sortOptions);
+        console.log(this.props.sortOptions, prevProps.sortOptions);
         if (this.props.sortOptions !== prevProps.sortOptions) {
             this.sort();
         }
@@ -42,6 +42,7 @@ class CoursesContainer extends Component {
                 text: option.option
             };
         });
+        
         this.setState({
             options: options,
             option: options[0].value
