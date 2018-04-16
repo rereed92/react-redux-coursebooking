@@ -12,9 +12,10 @@ import { loadCategories } from './actions/categoryActions';
 import { loadSortBy } from './actions/sortByActions';
 
 const store = configureStore();
-store.dispatch(loadCourses());
-store.dispatch(loadCategories());
-store.dispatch(loadSortBy());
+[loadCourses(), loadCategories(), loadSortBy()].forEach(store.dispatch);
+// store.dispatch(loadCourses());
+// store.dispatch(loadCategories());
+// store.dispatch(loadSortBy());
 
 ReactDOM.render(
     <Provider store={store}>

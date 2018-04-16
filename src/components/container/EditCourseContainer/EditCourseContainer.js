@@ -51,7 +51,6 @@ class EditCourseContainer extends Component {
         });
     };
 
-
     getCourse(courseId) {
         const course = courseApi.getCourse(courseId);
         this.setState({
@@ -116,7 +115,6 @@ class EditCourseContainer extends Component {
                         name="category"
                         label="Category"
                         value={course.category}
-                        defaultOption="Select Category"
                         options={categories}
                         onChange={this.handleInputChange} />
 

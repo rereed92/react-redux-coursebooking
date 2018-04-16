@@ -1,36 +1,25 @@
-const sortBy = [
+const sortOptions = [
     {
-        types: [
-            {
-                id: 'asc',
-                type: 'Ascending'
-            },
-            {
-                id: 'desc',
-                type: 'Descending'
-            }
-        ]
+        id: 'title-asc', 
+        option: 'Title - Ascending'
     },
     {
-        options: [
-            {
-                id: 'title',
-                option: 'Title'
-            },
-            {
-                id: 'author',
-                option: 'Author'
-            },
-            {
-                id: 'category',
-                option: 'Category'
-            },
-            {
-                id: 'length',
-                option: 'Length'
-            }
-        ]
+        id: 'title-desc', 
+        option: 'Title - Descending'
     }
 ];
 
-export default sortBy;
+const delay = 500;
+
+class sortApi {
+
+    static getSortOptions() {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(Object.assign([], sortOptions));
+            }, delay);
+        });
+    }
+}
+
+export default sortApi;

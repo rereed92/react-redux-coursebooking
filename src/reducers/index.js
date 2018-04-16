@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import courses from './courseReducers';
 import categories from './categoryReducers';
-import sortBy from './sortByReducers';
+import sortOptions from './sortByReducers';
 
 const reducers = combineReducers({
     courses,
     categories,
-    sortBy
+    sortOptions
 });
 
 export default reducers;

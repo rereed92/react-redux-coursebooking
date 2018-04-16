@@ -86,10 +86,10 @@ export function removeCourseSuccess(id) {
 }
 
 
-export function sortCourse(option, sorttype) {
+export function sortCourse(option, order) {
     return {
         type: types.SORT_COURSE,
         option,
-        sorttype
+        order
     };
 }
