@@ -55,8 +55,6 @@ const courseReducers = (state = [], action) => {
             });
 
         case types.SORT_COURSE:
-            // console.log(action);
-            console.log(action.option, action.order);
             return [...state].sort(sort(action.option, action.order === 'asc' ? true : false));
 
         default:

@@ -6,6 +6,14 @@ const sortOptions = [
     {
         id: 'title-desc', 
         option: 'Title - Descending'
+    },
+    {
+        id: 'length-asc', 
+        option: 'Length - Ascending'
+    },
+    {
+        id: 'length-desc', 
+        option: 'Length - Descending'
     }
 ];
 
