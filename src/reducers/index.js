@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
 import courses from './courseReducers';
-import categories from './categoryReducers';
-import sortOptions from './sortByReducers';
+import sort from './sortByReducers';
 
 const reducers = combineReducers({
     courses,
-    categories,
-    sortOptions
+    sort
 });
 
 export default reducers;

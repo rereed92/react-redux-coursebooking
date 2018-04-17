@@ -41,6 +41,17 @@ let courses = [
     }
 ];
 
+const sortCourses = (key, asc=true) => {
+    return function(a, b) {  
+        if (a[key] > b[key]) {  
+            return asc ? 1 : -1  
+        } else if (a[key] < b[key]) {  
+            return asc ? -1 : 1;
+        }  
+        return 0;  
+    };
+};
+
 const delay = 500;
 
 class courseApi {
@@ -83,6 +94,15 @@ class courseApi {
             setTimeout(() => {
                 courses = courses.filter(course => course.id !== courseId);
                 resolve(courseId);
+            }, delay);
+        });
+    }
+
+    static sortCourse(option, order) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                courses = [...courses].sort(sortCourses(option, order === 'asc' ? true : false));
+                resolve(option, order === true ? 'asc' : 'desc');
             }, delay);
         });
     }

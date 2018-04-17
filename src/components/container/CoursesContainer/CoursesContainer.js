@@ -10,6 +10,7 @@ import SortBy from '../../presentational/SortBy/SortBy';
 import sortApi from '../../../api/sortBy';
 
 import { removeCourse, sortCourse } from '../../../actions/courseActions';
+import { updateSortOption } from '../../../actions/sortByActions';
 
 
 class CoursesContainer extends Component {
@@ -18,7 +19,6 @@ class CoursesContainer extends Component {
 
         this.state = {
             options: [],
-            option: ''
         };
     }
 
@@ -36,8 +36,7 @@ class CoursesContainer extends Component {
             });
             this.setState({
                 options: sortOptions,
-                option: sortOptions[0].value
-            }, (() => this.handleSortCourses(this.state.option)));
+            }, (() => this.handleSortCourses(this.props.sort.option)));
         });
     }
 
@@ -46,12 +45,7 @@ class CoursesContainer extends Component {
     };
 
     handleSortCourses = (sortOption) => {
-        const option = sortOption.split('-')[0];
-        const order = sortOption.split('-')[1];
-
-        this.setState({
-            option: sortOption
-        }, (() => this.props.sortCourses(option, order)));
+        this.props.sortCourses(sortOption);
     }
 
     render() { 
@@ -59,7 +53,7 @@ class CoursesContainer extends Component {
             <div>
                 <h2>Courses</h2>
                 <Link to="/add-course">Add Course</Link>
-                <SortBy options={this.state.options} option={this.state.option} sortCourses={this.handleSortCourses} />
+                <SortBy options={this.state.options} option={this.props.sort.option} sortCourses={this.handleSortCourses} />
                 <CourseListContainer courses={this.props.courses} onRemoveClick={this.handleRemoveClick} />
             </div>
         );
@@ -68,7 +62,7 @@ class CoursesContainer extends Component {
 
 CoursesContainer.propTypes = {
     courses: PropTypes.array.isRequired,
-    sortOptions: PropTypes.array.isRequired,
+    sort: PropTypes.object.isRequired,
     onRemoveClick: PropTypes.func.isRequired,
     sortCourses: PropTypes.func.isRequired
 };
@@ -76,7 +70,7 @@ CoursesContainer.propTypes = {
 const mapStateToProps = (state) => {
     return {
         courses: state.courses,
-        sortOptions: state.sortOptions
+        sort: state.sort
     };
 };
 
@@ -85,9 +79,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onRemoveClick: (id) => {
             dispatch(removeCourse(id));
         },
-        sortCourses: (option, order) => {
-            dispatch(sortCourse(option, order))
-        }
+        sortCourses: (sortOption) => {
+            dispatch(sortCourse(sortOption.split('-')[0], sortOption.split('-')[1]));
+            dispatch(updateSortOption(sortOption));
+        },
     };
 };
 

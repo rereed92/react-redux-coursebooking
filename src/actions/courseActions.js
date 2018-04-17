@@ -85,8 +85,18 @@ export function removeCourseSuccess(id) {
     };
 }
 
-
 export function sortCourse(option, order) {
+    return function(dispatch) {
+        return courseApi.sortCourse(option, order)
+            .then((op, or) => {
+                dispatch(sortCourseSuccess(option, order));
+            }).catch(error => {
+                throw(error);
+            });
+    };
+}
+
+export function sortCourseSuccess(option, order) {
     return {
         type: types.SORT_COURSE,
         option,
