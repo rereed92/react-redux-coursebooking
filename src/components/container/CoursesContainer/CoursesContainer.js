@@ -7,6 +7,8 @@ import CourseListContainer from '../CourseListContainer/CourseListContainer';
 import SortByContainer from '../SortByContainer/SortByContainer';
 import SortBy from '../../presentational/SortBy/SortBy';
 
+import sortApi from '../../../api/sortBy';
+
 import { removeCourse, sortCourse } from '../../../actions/courseActions';
 
 
@@ -20,34 +22,24 @@ class CoursesContainer extends Component {
         };
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     if (this.props.sortOptions !== nextProps.sortOptions) {
-    //         console.log('nextProps');
-    //         nextProps.load();
-    //     }
-    // }
-
-    componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props.sortOptions, prevProps.sortOptions);
-        console.log(this.props.sortOptions, prevProps.sortOptions);
-        if (this.props.sortOptions !== prevProps.sortOptions) {
-            this.sort();
-        }
+    componentDidMount() {
+        this.getSortOptions();
     }
 
-    sort() {
-        const options = this.props.sortOptions.map(option => {
-            return {
-                value: option.id,
-                text: option.option
-            };
+    getSortOptions() {
+        sortApi.getSortOptions().then(options => {
+            const sortOptions = options.map(option => {
+                return {
+                    value: option.id,
+                    text: option.option
+                };
+            });
+            this.setState({
+                options: sortOptions,
+                option: sortOptions[0].value
+            }, (() => this.handleSortCourses(this.state.option)));
         });
-        
-        this.setState({
-            options: options,
-            option: options[0].value
-        }, (() => this.handleSortCourses(this.state.option)));
-    };
+    }
 
     handleRemoveClick = (id) => {
         this.props.onRemoveClick(id);
