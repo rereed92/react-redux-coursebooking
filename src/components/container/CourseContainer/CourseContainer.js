@@ -8,6 +8,7 @@ import courseApi from '../../../api/courses';
 import { removeCourse } from '../../../actions/courseActions';
 
 import RemoveCourse from '../../presentational/RemoveCourse/RemoveCourse';
+import Loading from '../../presentational/Loading/Loading';
 
 class CourseContainer extends Component {
 
@@ -16,7 +17,8 @@ class CourseContainer extends Component {
     
         this.state = {
             course: {},
-            showModal: false
+            showModal: false,
+            loading: true
         };
 
         this.showModal = this.showModal.bind(this);
@@ -31,7 +33,8 @@ class CourseContainer extends Component {
     getCourse(courseId) {
         const course = courseApi.getCourse(courseId);
         this.setState({
-            course: course[0]
+            course: course[0],
+            loading: false
         });
     }
 
@@ -54,6 +57,10 @@ class CourseContainer extends Component {
         const removeCourseModal = showModal ? (
             <RemoveCourse course={course} removeCourse={this.handleRemoveClick} hideModal={this.hideModal} />
         ) : null;
+
+        if (this.state.loading) {
+            return ( <Loading /> );
+        }
 
         return (
             <div>

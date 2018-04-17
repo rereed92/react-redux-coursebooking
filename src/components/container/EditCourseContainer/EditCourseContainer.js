@@ -9,6 +9,7 @@ import { updateCourse } from '../../../actions/courseActions';
 
 import TextInput from '../../presentational/common/TextInput';
 import SelectInput from '../../presentational/common/SelectInput';
+import Loading from '../../presentational/Loading/Loading';
 
 class EditCourseContainer extends Component {
 
@@ -24,7 +25,8 @@ class EditCourseContainer extends Component {
                 author: '',
                 length: '',
                 category: ''
-            }
+            },
+            loading: true
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -59,7 +61,7 @@ class EditCourseContainer extends Component {
                 ...course[0],
                 category: categoryApi.getCategoryId(course[0].category)
             }
-        }, (() => console.log(this.state)));
+        });
     }
 
     getCategories() {
@@ -73,11 +75,16 @@ class EditCourseContainer extends Component {
             this.setState({
                 categories: formattedCategories
             });
-        });
+        }).then(() => this.setState({ loading: false }));
     }
 
     render() { 
-        const { course, categories } = this.state; 
+        const { course, categories, loading } = this.state; 
+
+        if (loading) {
+            return ( <Loading /> );
+        }
+
         return (
             <div>
                 <h2>Edit { course.title }</h2>
