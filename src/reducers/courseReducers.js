@@ -21,19 +21,17 @@ const courseReducers = (state = initialState.courses, action) => {
         case types.ADD_COURSE:
             return [
                 ...state,
-                Object.assign({}, action)
+                Object.assign({}, action.course)
             ];
 
         case types.UPDATE_COURSE:
             return [
-                ...state.filter((course) => course.id !== action.id),
-                Object.assign({}, action)
+                ...state.filter((course) => course.id !== action.course.id),
+                Object.assign({}, action.course)
             ];
 
         case types.REMOVE_COURSE:
-            return state.filter((item) => {
-                return item.id !== action.id;
-            });
+            return state.filter((item) => item.id !== action.id);
 
         case types.SORT_COURSE:
             return [...state].sort(sort(action.option, action.order === 'asc' ? true : false));

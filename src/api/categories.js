@@ -32,6 +32,18 @@ class categoryApi {
             }, delay);
         });
     }
+
+    static getCategoryId(title) {
+        for (let key in categories) {
+            if (categories[key].title === title) return categories[key].id;
+        }
+    }
+
+    static getCategoryTitle(id) {
+        for (let key in categories) {
+            if (categories[key].id === id) return categories[key].title;
+        }
+    }
 }
 
 export default categoryApi;
