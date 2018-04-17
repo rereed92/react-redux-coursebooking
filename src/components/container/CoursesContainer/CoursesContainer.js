@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import CourseListContainer from '../CourseListContainer/CourseListContainer';
 import SortByContainer from '../SortByContainer/SortByContainer';
 import SortBy from '../../presentational/SortBy/SortBy';
+import Loading from '../../presentational/Loading/Loading';
 
 import sortApi from '../../../api/sortBy';
 
@@ -19,6 +20,7 @@ class CoursesContainer extends Component {
 
         this.state = {
             options: [],
+            loading: true
         };
     }
 
@@ -27,7 +29,8 @@ class CoursesContainer extends Component {
     }
 
     getSortOptions() {
-        sortApi.getSortOptions().then(options => {
+        sortApi.getSortOptions()
+        .then(options => {
             const sortOptions = options.map(option => {
                 return {
                     value: option.id,
@@ -45,10 +48,16 @@ class CoursesContainer extends Component {
     };
 
     handleSortCourses = (sortOption) => {
-        this.props.sortCourses(sortOption);
+        this.setState({ loading: true });
+        this.props.sortCourses(sortOption)
+            .then(() => this.setState({ loading: false }));
     }
 
     render() { 
+        if (this.state.loading) {
+            return ( <Loading /> );
+        }
+
         return (
             <div>
                 <h2>Courses</h2>
@@ -80,8 +89,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(removeCourse(id));
         },
         sortCourses: (sortOption) => {
-            dispatch(sortCourse(sortOption.split('-')[0], sortOption.split('-')[1]));
-            dispatch(updateSortOption(sortOption));
+            return dispatch(sortCourse(sortOption.split('-')[0], sortOption.split('-')[1]))
+                .then(() => {
+                    return dispatch(updateSortOption(sortOption))
+                });
         },
     };
 };
