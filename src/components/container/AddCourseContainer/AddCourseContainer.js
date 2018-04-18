@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import categoryApi from '../../../api/categories';
@@ -8,6 +7,7 @@ import { addCourse } from '../../../actions/courseActions';
 
 import TextInput from '../../presentational/common/TextInput';
 import SelectInput from '../../presentational/common/SelectInput';
+import Loading from '../../presentational/Loading/Loading';
 
 class AddCourseContainer extends Component {
     constructor(props) {
@@ -31,16 +31,9 @@ class AddCourseContainer extends Component {
 
     componentDidMount() {
         this.getCategories();
-    } 
-
-    findSelectValue = (value) => {
-        for (let key in this.state.categories) {
-            if (this.state.categories[key].value === value) return this.state.categories[key].text;
-        }
-    };
+    }
 
     handleInputChange = (e) => {
-        // const value = e.target.type === 'text' ? e.target.value : this.findSelectValue(e.target.value);
         this.setState({
             course: {
               ...this.state.course,
@@ -65,6 +58,10 @@ class AddCourseContainer extends Component {
 
     render() { 
         const { course, categories, loading } = this.state; 
+
+        if (loading) {
+            return ( <Loading /> );
+        }
 
         return (
             <div>

@@ -37,14 +37,7 @@ class EditCourseContainer extends Component {
         this.getCourse(this.props.params.id);
     } 
 
-    findSelectValue = (value) => {
-        for (let key in this.state.categories) {
-            if (this.state.categories[key].value === value) return this.state.categories[key].text;
-        }
-    };
-
     handleInputChange = (e) => {
-        // const value = e.target.type === 'text' ? e.target.value : this.findSelectValue(e.target.value);
         this.setState({
             course: {
               ...this.state.course,

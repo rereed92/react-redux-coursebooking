@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
 import CourseListContainer from '../CourseListContainer/CourseListContainer';
-import SortByContainer from '../SortByContainer/SortByContainer';
 import SortBy from '../../presentational/SortBy/SortBy';
 import Loading from '../../presentational/Loading/Loading';
 
