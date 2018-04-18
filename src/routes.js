@@ -15,7 +15,7 @@ export default (
         <Route path="about" component={AboutContainer} />
         <Route path="courses" component={CoursesContainer} />
         <Route path="add-course" component={AddCourseContainer} />
-        <Route path="course/:id" component={CourseContainer} />
-        <Route path="course/:id/edit" component={EditCourseContainer} />
+        <Route path="courses/:id" component={CourseContainer} />
+        <Route path="courses/:id/edit" component={EditCourseContainer} />
     </Route>
 );

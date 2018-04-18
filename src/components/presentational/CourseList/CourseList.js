@@ -6,7 +6,7 @@ const CourseList = ({ course, onRemoveClick }) => {
     return (
         <li key={course.id}>
             <h4>{course.title}</h4>
-            <Link to={"/course/" + course.id}>View Course</Link>
+            <Link to={"/courses/" + course.id}>View Course</Link>
         </li>
     );
 };

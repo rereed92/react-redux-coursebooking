@@ -81,7 +81,7 @@ class CourseContainer extends Component {
 
                 <ul>    
                     <li><Link to="/courses">Go back to Courses</Link></li>
-                    <li><Link to={"/course/" + course.id + "/edit"}>Edit Course</Link></li>
+                    <li><Link to={"/courses/" + course.id + "/edit"}>Edit Course</Link></li>
                     <li><button onClick={this.showModal}>Remove Course</button></li>
                     { removeCourseModal }
                 </ul>

@@ -38,7 +38,6 @@ class EditCourseContainer extends Component {
     } 
 
     findSelectValue = (value) => {
-        console.log(value);
         for (let key in this.state.categories) {
             if (this.state.categories[key].value === value) return this.state.categories[key].text;
         }
@@ -51,7 +50,7 @@ class EditCourseContainer extends Component {
               ...this.state.course,
               [e.target.name]: e.target.value
             },
-        }, (() => console.log(this.state)));
+        });
     };
 
     getCourse(courseId) {
@@ -131,8 +130,6 @@ class EditCourseContainer extends Component {
 
                     <button>Save</button>
                 </form>
-
-
             </div>
         );
     }

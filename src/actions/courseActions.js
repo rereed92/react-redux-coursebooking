@@ -24,6 +24,7 @@ export function loadCoursesSuccess(courses) {
 }
 
 export function addCourse(course) {
+    course.id = course.title ? (course.title).replace(' ', '-') : courseIndex++;
     return function(dispatch) {
         return courseApi.addCourse(course)
             .then(newCourse => {
@@ -35,15 +36,10 @@ export function addCourse(course) {
     };
 }
 
-export function addCourseSuccess(courseDetails) {
+export function addCourseSuccess(course) {
     return {
         type: types.ADD_COURSE,
-        id: courseDetails.title ? (courseDetails.title).replace(' ', '-') : courseIndex++,
-        title: courseDetails.title,
-        watchHref: courseDetails.watchHref,
-        authorId: courseDetails.authorId,
-        length: courseDetails.length,
-        category: courseDetails.category
+        course
     };
 }
 
@@ -52,7 +48,7 @@ export function updateCourse(course) {
         return courseApi.updateCourse(course)
             .then(course => {
                 dispatch(updateCourseSuccess(course));
-                dispatch(push(`/course/${course.id}`));
+                dispatch(push(`/courses/${course.id}`));
             }).catch(error => {
                 throw(error);
             });

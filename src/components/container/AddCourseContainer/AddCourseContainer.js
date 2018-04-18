@@ -2,54 +2,76 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import categoryApi from '../../../api/categories';
+
 import { addCourse } from '../../../actions/courseActions';
 
 import TextInput from '../../presentational/common/TextInput';
 import SelectInput from '../../presentational/common/SelectInput';
-
-let allCategories = [];
 
 class AddCourseContainer extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            id: '',
-            title: '',
-            watchHref: '',
-            author: '',
-            length: '',
-            category: ''
+            categories: [],
+            course: {
+                id: '',
+                title: '',
+                watchHref: '',
+                author: '',
+                length: '',
+                category: ''
+            },
+            loading: true
         };
 
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
+    componentDidMount() {
+        this.getCategories();
+    } 
+
     findSelectValue = (value) => {
-        for (let key in allCategories) {
-            if (allCategories[key].value === value) return allCategories[key].text;
+        for (let key in this.state.categories) {
+            if (this.state.categories[key].value === value) return this.state.categories[key].text;
         }
     };
 
     handleInputChange = (e) => {
-        const value = e.target.type === 'text' ? e.target.value : this.findSelectValue(e.target.value);
-        this.setState({ [e.target.name]: value });
+        // const value = e.target.type === 'text' ? e.target.value : this.findSelectValue(e.target.value);
+        this.setState({
+            course: {
+              ...this.state.course,
+              [e.target.name]: e.target.value
+            },
+        });
+    };
+
+    getCategories() {
+        categoryApi.getCategories().then(categories => {
+            const formattedCategories = categories.map(category => {
+                return {
+                    value: category.id,
+                    text: category.title
+                };
+            });
+            this.setState({
+                categories: formattedCategories
+            });
+        }).then(() => this.setState({ loading: false }));
     };
 
     render() { 
-        allCategories = this.props.categories.map(category => {
-            return {
-                value: category.id,
-                text: category.title
-            };
-        });
+        const { course, categories, loading } = this.state; 
 
         return (
             <div>
                 <h3>Add Course</h3>
                 <form onSubmit={(e) => {
                         e.preventDefault();
-                        this.props.addNewCourse(this.state);
+                        this.props.addNewCourse(course);
                         this.setState({
                             id: '',
                             title: '',
@@ -64,36 +86,36 @@ class AddCourseContainer extends Component {
                         name="title"
                         label="Title"
                         placeholder="title"
-                        value={this.state.title} 
+                        value={course.title} 
                         onChange={this.handleInputChange}/>
 
                     <TextInput
                         name="watchHref"
                         label="Watch Href"
                         placeholder="href"
-                        value={this.state.watchHref} 
+                        value={course.watchHref} 
                         onChange={this.handleInputChange}/>
                     
                     <TextInput
                         name="author"
                         label="Author"
                         placeholder="author"
-                        value={this.state.author} 
+                        value={course.author} 
                         onChange={this.handleInputChange}/>
 
                     <TextInput
                         name="length"
                         label="Length"
                         placeholder="length"
-                        value={this.state.length} 
+                        value={course.length} 
                         onChange={this.handleInputChange}/>
 
                     <SelectInput
                         name="category"
                         label="Category"
-                        value={this.state.category}
+                        value={course.category}
                         defaultOption="Select Category"
-                        options={allCategories}
+                        options={categories}
                         onChange={this.handleInputChange} />
 
                     <button>Add</button>
@@ -103,19 +125,15 @@ class AddCourseContainer extends Component {
     }
 }
 
-AddCourseContainer.propTypes = {
-    categories: PropTypes.array.isRequired,
-};
-
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories,
     };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         addNewCourse: (course) => {
+            course.category = categoryApi.getCategoryTitle(course.category);
             dispatch(addCourse(course))
         },
     };

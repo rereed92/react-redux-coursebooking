@@ -8,14 +8,12 @@ import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
 import { loadCourses } from './actions/courseActions';
-// import { loadCategories } from './actions/categoryActions';
 import { loadSort } from './actions/sortByActions';
 
 const store = configureStore();
 // [loadCourses()].forEach(store.dispatch);
 store.dispatch(loadCourses());
 store.dispatch(loadSort());
-// store.dispatch(loadCategories());
 
 ReactDOM.render(
     <Provider store={store}>
