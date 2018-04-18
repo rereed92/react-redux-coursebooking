@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import courseApi from '../../../api/courses';
 import categoryApi from '../../../api/categories';
@@ -123,6 +124,11 @@ class EditCourseContainer extends Component {
 
                     <button>Save</button>
                 </form>
+
+                <ul>    
+                    <li><Link to={"/courses/" + course.id}>View Course</Link></li>
+                    <li><Link to="/courses">Go back to Courses</Link></li>
+                </ul>
             </div>
         );
     }
